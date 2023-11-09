@@ -45,7 +45,8 @@ class SetUsersData extends StatelessWidget {
                                 controller: name,
                                 title: AppStrings.name,
                                 validator: (String? nameText) {
-                                  if (nameText == null || nameText.isEmpty) {
+                                  if (nameText == null ||
+                                      nameText.trim().isEmpty) {
                                     return 'pleas enter your name';
                                   }
                                   return null;
@@ -211,20 +212,26 @@ class SetUsersData extends StatelessWidget {
             showDialog(
               context: context,
               builder: (context) =>
-                  AlertDialog(content: CircularProgressIndicator()),
+                  const AlertDialog(content: CircularProgressIndicator()),
             );
           } else if (state is SetUsersDataSuccessState) {
             Navigator.pop(context);
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(content: Text('success')),
-            );
           } else if (state is SetUsersDataFailureState) {
             Navigator.pop(context);
 
             showDialog(
               context: context,
-              builder: (context) => AlertDialog(content: Text('faild')),
+              builder: (context) => AlertDialog(
+                  title: Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 100.h,
+                  ),
+                  content: Text(
+                    AppStrings.thereWasAnError,
+                    style: poppins20W400(),
+                    textAlign: TextAlign.center,
+                  )),
             );
           }
         },

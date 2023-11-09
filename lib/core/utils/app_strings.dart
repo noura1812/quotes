@@ -8,4 +8,5 @@ class AppStrings {
   static String name = 'Name';
   static String category = 'Category';
   static String next = 'Next';
+  static String thereWasAnError = 'There was an error try again later ';
 }
