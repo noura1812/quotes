@@ -14,7 +14,7 @@ class LocalDto implements SetUsersDDataSource {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       final String jsonString = jsonEncode(usersDataModel.toJson());
-      await prefs.setString(cachedUserDataName, jsonString);
+      await prefs.setString(Constants.cachedUserDataName, jsonString);
       return right(null);
     } catch (e) {
       return left(CachedFailure(message: e.toString()));

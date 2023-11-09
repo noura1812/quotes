@@ -10,8 +10,8 @@ import 'package:quotes/features/set_data/domain/usecases/set_users_data_use_case
 part 'set_data_state.dart';
 
 class SetDataCubit extends Cubit<SetDataState> {
-  List<String> categoriesList = [...categories];
-  List<String> defaultCategories = [...categories];
+  List<String> categoriesList = [...Constants.categories];
+  List<String> defaultCategories = [...Constants.categories];
   List<String> usersCategory = [];
   List<String> temp = [];
   bool select = false;

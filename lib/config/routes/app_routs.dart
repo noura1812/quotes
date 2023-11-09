@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:quotes/features/set_data/presentation/pages/se_users_data.dart';
+import 'package:quotes/features/tabs_screens/presentation/pages/test_screen.dart';
 
 class Routes {
-  static const String setUsersData = '/';
+  static const String testScreen = '/';
 }
 
 class AppRoutes {
   static Route onGenerate(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      case Routes.setUsersData:
+      case Routes.testScreen:
         return MaterialPageRoute(
-          builder: (context) => SetUsersData(),
+          builder: (context) => TestScreen(),
         );
       default:
         {
