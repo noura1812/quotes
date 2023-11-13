@@ -20,7 +20,7 @@ class TestScreen extends StatelessWidget {
                 width: double.infinity,
                 height: double.infinity,
                 child: state is TabsScreensGetDataRemoteSuccessState
-                    ? Image.network(state.quotes.image.largeImageUrl ?? '')
+                    ? Image.network(state.quotes[0].image!.largeImageUrl ?? '')
                     : state is TabsScreensGetDataRemoteFailureState
                         ? Text(state.failures.toString())
                         : CircularProgressIndicator(),

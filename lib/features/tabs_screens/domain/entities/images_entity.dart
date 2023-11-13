@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class ImagesEntity {
   String? largeImageUrl;
   String? type;
@@ -8,4 +7,16 @@ class ImagesEntity {
     this.type,
     this.id,
   });
+  ImagesEntity.fromJson(Map<String, dynamic> json) {
+    largeImageUrl = json['largeImageUrl'];
+    type = json['type'];
+    id = json['id'];
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'largeImageUrl': largeImageUrl,
+      'type': type,
+      'id': id,
+    };
+  }
 }

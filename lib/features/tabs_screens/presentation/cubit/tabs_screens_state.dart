@@ -6,7 +6,7 @@ abstract class TabsScreensState {}
 class TabsScreensInitial extends TabsScreensState {}
 
 class TabsScreensGetDataRemoteSuccessState extends TabsScreensState {
-  QuotesDataEntity quotes;
+  List<QuotesDataEntity> quotes;
   TabsScreensGetDataRemoteSuccessState({
     required this.quotes,
   });

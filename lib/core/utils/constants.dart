@@ -68,7 +68,8 @@ class Constants {
     'movies',
     'success',
   ];
-  static const String cachedUserDataName = 'usersData';
+  static const String cachedUserData = 'usersData';
+  static const String cachedFaveQuotes = 'fav quotes';
   static const imageBaseUrl = 'https://pixabay.com/api/';
   static const quotesBaseUrl = 'https://api.api-ninjas.com/v1/quotes';
 }
