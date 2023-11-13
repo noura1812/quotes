@@ -1,12 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:quotes/core/error/failures.dart';
 import 'package:quotes/features/set_data/data/models/users_data_model.dart';
-import 'package:quotes/features/tabs_screens/data/models/quotes_data.dart';
 import 'package:quotes/features/tabs_screens/domain/entities/quotes_date_entity.dart';
 
-abstract class QuotesDataSource {
-  Future<Either<Failures, List<QuotesData>>> getQuotesData(
+abstract class GetQuotesDataDomainRepo {
+  Future<Either<Failures, List<QuotesDataEntity>>> getQuotesData(
       {UsersDataModel? usersDataModel});
-  Future<Either<Failures, void>> saveQuotesData(
-      QuotesDataEntity quotesDataEntity);
 }
