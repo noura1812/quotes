@@ -5,13 +5,13 @@ import 'package:quotes/core/error/failures.dart';
 import 'package:quotes/features/tabs_screens/data/datasources/data_sources.dart';
 import 'package:quotes/features/tabs_screens/data/datasources/local.dart';
 import 'package:quotes/features/tabs_screens/domain/entities/quotes_date_entity.dart';
-import 'package:quotes/features/tabs_screens/domain/repositories/save_fav_quotes_domain_repo.dart';
+import 'package:quotes/features/tabs_screens/domain/repositories/remove_fav_quote_domain_repo.dart';
 
-class SaveFavQuotesDataRepo implements SaveFavQuotesDomainRepo {
+class RemoveFavQuotesDataRepo implements RemoveFavQuotesDomainRepo {
   QuotesDataSource quotesDataSource = LocalDto();
-  SaveFavQuotesDataRepo();
+  RemoveFavQuotesDataRepo();
   @override
-  Future<Either<Failures, bool>> saveQuotesData(
+  Future<Either<Failures, bool>> removeQuotesData(
           QuotesDataEntity quotesDataEntity) =>
-      quotesDataSource.saveQuotesData(quotesDataEntity);
+      quotesDataSource.removeQuotesData(quotesDataEntity);
 }

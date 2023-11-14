@@ -27,7 +27,7 @@ class RemoteDto implements QuotesDataSource {
 
       Random random = Random();
       List<QuotesData> quotesList = [];
-      for (var i = 0; i < 3; i++) {
+      for (var i = 0; i < 5; i++) {
         int category = random.nextInt(usersData.categories.length);
         int page = random.nextInt(5) + 1;
         String quoteCategory = usersData.categories[category];
@@ -35,12 +35,14 @@ class RemoteDto implements QuotesDataSource {
             '${Constants.quotesBaseUrl}${EndPoints.quoteEndPoint}&category=$quoteCategory&');
         Quotes quotes = Quotes.fromJson(quotesResponse.data[0]);
         Images images = Images();
-        while (images.hits == null || images.hits!.isEmpty) {
-          var imagesResponse = await dio.get(
-              '${Constants.imageBaseUrl}${EndPoints.imagesEndPoint}&q=$quoteCategory&page=$page&per_page=3');
-          images = Images.fromJson(imagesResponse.data);
+        var imagesResponse = await dio.get(
+            '${Constants.imageBaseUrl}${EndPoints.imagesEndPoint}&q=$quoteCategory&page=$page&per_page=3');
+        images = Images.fromJson(imagesResponse.data);
+        if (images.hits!.isEmpty) {
+          i--;
+        } else {
+          quotesList.add(QuotesData(image: images.hits![0], quote: quotes));
         }
-        quotesList.add(QuotesData(image: images.hits![0], quote: quotes));
       }
 
       return right(quotesList);
@@ -51,6 +53,12 @@ class RemoteDto implements QuotesDataSource {
 
   @override
   Future<Either<Failures, bool>> saveQuotesData(
+      QuotesDataEntity quotesDataEntity) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failures, bool>> removeQuotesData(
       QuotesDataEntity quotesDataEntity) {
     throw UnimplementedError();
   }

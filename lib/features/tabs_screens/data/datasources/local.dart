@@ -59,7 +59,7 @@ class LocalDto implements QuotesDataSource {
     }
   }
 
-  Future<Either<Failures, void>> removeQuotesData(
+  Future<Either<Failures, bool>> removeQuotesData(
       QuotesDataEntity quotesDataEntity) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -74,7 +74,7 @@ class LocalDto implements QuotesDataSource {
       }
       await prefs.setStringList(Constants.cachedFaveQuotes, allFaveQuotes);
 
-      return right(null);
+      return right(true);
     } catch (e) {
       return left(CachedFailure(message: e.toString()));
     }

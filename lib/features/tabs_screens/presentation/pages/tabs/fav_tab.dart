@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quotes/core/utils/app_colors.dart';
 import 'package:quotes/core/utils/text_styles.dart';
 import 'package:quotes/features/tabs_screens/domain/entities/quotes_date_entity.dart';
 import 'package:quotes/features/tabs_screens/presentation/cubit/tabs_screens_cubit.dart';
@@ -61,11 +62,16 @@ class FavTab extends StatelessWidget {
                             icon: Icon(
                               Icons.copy,
                               size: 30.h,
+                              color: AppColors.primaryColor,
                             )),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              TabsScreensCubit.get(context)
+                                  .removeFromFav(index);
+                            },
                             icon: Icon(
                               Icons.favorite,
+                              color: AppColors.primaryColor,
                               size: 30.h,
                             )),
                       ],

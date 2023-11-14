@@ -2,27 +2,32 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quotes/config/routes/app_routs.dart';
 import 'package:quotes/core/reusable%20widgets/dotted_line.dart';
 import 'package:quotes/core/reusable%20widgets/textfield_widget.dart';
 import 'package:quotes/core/utils/app_colors.dart';
 import 'package:quotes/core/utils/app_strings.dart';
 import 'package:quotes/core/utils/text_styles.dart';
 import 'package:quotes/features/set_data/data/datastores/local.dart';
+import 'package:quotes/features/set_data/data/models/users_data_model.dart';
 import 'package:quotes/features/set_data/presentation/cubit/set_data_cubit.dart';
 import 'package:quotes/features/set_data/presentation/widgets/category_card.dart';
 import 'package:quotes/features/set_data/presentation/widgets/chip.dart';
 import 'package:quotes/features/set_data/presentation/widgets/pick_color.dart';
 
 class SetUsersData extends StatelessWidget {
-  final TextEditingController name = TextEditingController();
   final TextEditingController category = TextEditingController();
   SetUsersData({super.key});
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    var usersData =
+        ModalRoute.of(context)!.settings.arguments as UsersDataModel?;
+
     return BlocProvider(
-      create: (BuildContext context) => SetDataCubit(LocalDto()),
+      create: (BuildContext context) =>
+          SetDataCubit(LocalDto(), usersDataModel: usersData),
       child: BlocConsumer<SetDataCubit, SetDataState>(
         builder: (context, state) {
           return SafeArea(
@@ -42,7 +47,7 @@ class SetUsersData extends StatelessWidget {
                             Form(
                               key: formKey,
                               child: TextFieldWidget(
-                                controller: name,
+                                controller: SetDataCubit.get(context).name,
                                 title: AppStrings.name,
                                 validator: (String? nameText) {
                                   if (nameText == null ||
@@ -192,12 +197,17 @@ class SetUsersData extends StatelessWidget {
                     child: TextButton(
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            SetDataCubit.get(context)
-                                .setUsersData(name.text.trim());
+                            SetDataCubit.get(context).setUsersData();
+                            if (usersData == null) {
+                              Navigator.pushNamed(context, Routes.homeLayOut);
+                            } else {
+                              Navigator.pop(context,
+                                  SetDataCubit.get(context).usersDataModel);
+                            }
                           }
                         },
                         child: Text(
-                          AppStrings.next,
+                          AppStrings.save,
                           style: poppins24W600()
                               .copyWith(color: AppColors.blackColor),
                         )),
