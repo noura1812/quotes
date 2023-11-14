@@ -14,12 +14,4 @@ class Quotes extends QuotesEntity {
       category = json["category"];
     }
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["quote"] = quote;
-    _data["author"] = author;
-    _data["category"] = category;
-    return _data;
-  }
 }

@@ -17,11 +17,15 @@ class LocalDto implements QuotesDataSource {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       List<String>? jsonList = prefs.getStringList(Constants.cachedFaveQuotes);
       List<QuotesData> quotesList = [];
-      for (var quote in jsonList ?? []) {
-        QuotesData data =
-            QuotesDataEntity.fromJson(jsonDecode(quote)) as QuotesData;
-        quotesList.add(data);
+      if (jsonList != null) {
+        for (var quote in jsonList) {
+          QuotesDataEntity data = QuotesDataEntity.fromJson(jsonDecode(quote));
+          QuotesData quotesData = QuotesData(
+              image: data.image, quote: data.quote, favorite: data.favorite);
+          quotesList.add(quotesData);
+        }
       }
+
       return right(quotesList);
     } catch (e) {
       return left(CachedFailure(message: e.toString()));
@@ -29,18 +33,47 @@ class LocalDto implements QuotesDataSource {
   }
 
   @override
-  Future<Either<Failures, void>> saveQuotesData(
+  Future<Either<Failures, bool>> saveQuotesData(
       QuotesDataEntity quotesDataEntity) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      List<String>? allFaveQuotes =
-          prefs.getStringList(Constants.cachedFaveQuotes);
+      List<String> allFaveQuotes =
+          prefs.getStringList(Constants.cachedFaveQuotes) ?? [];
       final String jsonString = jsonEncode(quotesDataEntity.toJson());
-      allFaveQuotes == null
-          ? allFaveQuotes = [jsonString]
-          : allFaveQuotes.add(jsonString);
+      bool contains = false;
+      for (var element in allFaveQuotes) {
+        if (element.contains(quotesDataEntity.quote!.quote!)) {
+          contains = true;
+          break;
+        }
+      }
+      if (!contains) {
+        allFaveQuotes.add(jsonString);
 
+        await prefs.setStringList(Constants.cachedFaveQuotes, allFaveQuotes);
+        return right(true);
+      }
+      return right(false);
+    } catch (e) {
+      return left(CachedFailure(message: e.toString()));
+    }
+  }
+
+  Future<Either<Failures, void>> removeQuotesData(
+      QuotesDataEntity quotesDataEntity) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      List<String> allFaveQuotes =
+          prefs.getStringList(Constants.cachedFaveQuotes) ?? [];
+      for (var element in allFaveQuotes) {
+        if (element.contains(quotesDataEntity.quote!.quote!)) {
+          allFaveQuotes.remove(element);
+
+          break;
+        }
+      }
       await prefs.setStringList(Constants.cachedFaveQuotes, allFaveQuotes);
+
       return right(null);
     } catch (e) {
       return left(CachedFailure(message: e.toString()));

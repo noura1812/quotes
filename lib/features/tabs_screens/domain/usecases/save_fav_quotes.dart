@@ -8,6 +8,6 @@ class SaveFavQuotesUseCase {
   SaveFavQuotesUseCase({
     required this.saveFavQuotesDomainRepo,
   });
-  Future<Either<Failures, void>> call(QuotesDataEntity quotesDataEntity) =>
+  Future<Either<Failures, bool>> call(QuotesDataEntity quotesDataEntity) =>
       saveFavQuotesDomainRepo.saveQuotesData(quotesDataEntity);
 }
