@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:quotes/features/tabs_screens/presentation/pages/test_screen.dart';
+import 'package:quotes/features/tabs_screens/presentation/pages/home_layout.dart';
 
 class Routes {
-  static const String testScreen = '/';
+  static const String homeLayOut = '/';
 }
 
 class AppRoutes {
   static Route onGenerate(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      case Routes.testScreen:
+      case Routes.homeLayOut:
         return MaterialPageRoute(
-          builder: (context) => TestScreen(),
+          builder: (context) => HomeLayOut(),
         );
       default:
         {

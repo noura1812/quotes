@@ -90,7 +90,7 @@ class SetDataCubit extends Cubit<SetDataState> {
 
   colorsHeight() {
     if ((colorsList.length + 1) % 5 == 0) {
-      int height = ((colorsList.length + 1) / 5).toInt();
+      int height = (colorsList.length + 1) ~/ 5;
       return height;
     } else {
       int height = ((((colorsList.length + 1) / 5)) + 1).toInt();

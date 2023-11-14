@@ -12,7 +12,7 @@ class SaveFavQuotesDataRepo implements SaveFavQuotesDomainRepo {
     required this.quotesDataSource,
   });
   @override
-  Future<Either<Failures, void>> saveQuotesData(
+  Future<Either<Failures, bool>> saveQuotesData(
           QuotesDataEntity quotesDataEntity) =>
       quotesDataSource.saveQuotesData(quotesDataEntity);
 }

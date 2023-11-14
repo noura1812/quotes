@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:quotes/core/utils/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class UsersDataModel {
   int color;
   String name;
@@ -21,5 +26,11 @@ class UsersDataModel {
       name: json['name'],
       categories: List<String>.from(json['categories']),
     );
+  }
+
+  static Future<UsersDataModel> getCash() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? json = prefs.getString(Constants.cachedUserData);
+    return UsersDataModel.fromJson(jsonDecode(json ?? ''));
   }
 }

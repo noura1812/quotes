@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:dartz/dartz.dart';
@@ -12,7 +11,6 @@ import 'package:quotes/features/tabs_screens/data/models/images.dart';
 import 'package:quotes/features/tabs_screens/data/models/quotes.dart';
 import 'package:quotes/features/tabs_screens/data/models/quotes_data.dart';
 import 'package:quotes/features/tabs_screens/domain/entities/quotes_date_entity.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RemoteDto implements QuotesDataSource {
   Dio dio = Dio();
@@ -22,28 +20,24 @@ class RemoteDto implements QuotesDataSource {
     try {
       UsersDataModel usersData;
       if (usersDataModel == null) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        String? json = prefs.getString(Constants.cachedUserData);
-        usersData = UsersDataModel.fromJson(jsonDecode(json ?? ''));
+        usersData = await UsersDataModel.getCash();
       } else {
         usersData = usersDataModel;
       }
 
       Random random = Random();
       List<QuotesData> quotesList = [];
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < 3; i++) {
         int category = random.nextInt(usersData.categories.length);
         int page = random.nextInt(5) + 1;
-        int perPage = random.nextInt(5) + 3;
         String quoteCategory = usersData.categories[category];
         var quotesResponse = await dio.get(
             '${Constants.quotesBaseUrl}${EndPoints.quoteEndPoint}&category=$quoteCategory&');
         Quotes quotes = Quotes.fromJson(quotesResponse.data[0]);
-
         Images images = Images();
         while (images.hits == null || images.hits!.isEmpty) {
           var imagesResponse = await dio.get(
-              '${Constants.imageBaseUrl}${EndPoints.imagesEndPoint}&q=$quoteCategory&page=$page&per_page=$perPage');
+              '${Constants.imageBaseUrl}${EndPoints.imagesEndPoint}&q=$quoteCategory&page=$page&per_page=3');
           images = Images.fromJson(imagesResponse.data);
         }
         quotesList.add(QuotesData(image: images.hits![0], quote: quotes));
@@ -56,7 +50,7 @@ class RemoteDto implements QuotesDataSource {
   }
 
   @override
-  Future<Either<Failures, void>> saveQuotesData(
+  Future<Either<Failures, bool>> saveQuotesData(
       QuotesDataEntity quotesDataEntity) {
     throw UnimplementedError();
   }

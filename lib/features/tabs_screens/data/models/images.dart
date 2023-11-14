@@ -20,16 +20,6 @@ class Images {
           : (json["hits"] as List).map((e) => Hits.fromJson(e)).toList();
     }
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["total"] = total;
-    _data["totalHits"] = totalHits;
-    if (hits != null) {
-      _data["hits"] = hits?.map((e) => e.toJson()).toList();
-    }
-    return _data;
-  }
 }
 
 class Hits extends ImagesEntity {
@@ -144,32 +134,5 @@ class Hits extends ImagesEntity {
     if (json["userImageURL"] is String) {
       userImageUrl = json["userImageURL"];
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["pageURL"] = pageUrl;
-    _data["type"] = type;
-    _data["tags"] = tags;
-    _data["previewURL"] = previewUrl;
-    _data["previewWidth"] = previewWidth;
-    _data["previewHeight"] = previewHeight;
-    _data["webformatURL"] = webformatUrl;
-    _data["webformatWidth"] = webformatWidth;
-    _data["webformatHeight"] = webformatHeight;
-    _data["largeImageURL"] = largeImageUrl;
-    _data["imageWidth"] = imageWidth;
-    _data["imageHeight"] = imageHeight;
-    _data["imageSize"] = imageSize;
-    _data["views"] = views;
-    _data["downloads"] = downloads;
-    _data["collections"] = collections;
-    _data["likes"] = likes;
-    _data["comments"] = comments;
-    _data["user_id"] = userId;
-    _data["user"] = user;
-    _data["userImageURL"] = userImageUrl;
-    return _data;
   }
 }

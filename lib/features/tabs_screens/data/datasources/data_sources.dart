@@ -7,6 +7,6 @@ import 'package:quotes/features/tabs_screens/domain/entities/quotes_date_entity.
 abstract class QuotesDataSource {
   Future<Either<Failures, List<QuotesData>>> getQuotesData(
       {UsersDataModel? usersDataModel});
-  Future<Either<Failures, void>> saveQuotesData(
+  Future<Either<Failures, bool>> saveQuotesData(
       QuotesDataEntity quotesDataEntity);
 }
