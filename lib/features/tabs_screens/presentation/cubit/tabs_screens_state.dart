@@ -27,6 +27,8 @@ class TabsScreensGetDataLocalFailureState extends TabsScreensState {
 
 class SwitchTabsState extends TabsScreensState {}
 
+class ChangeSettings extends TabsScreensState {}
+
 class AddFavSuccessfully extends TabsScreensState {
   bool added;
   AddFavSuccessfully({
@@ -34,9 +36,23 @@ class AddFavSuccessfully extends TabsScreensState {
   });
 }
 
+class RemoveFromFavSuccessfully extends TabsScreensState {
+  bool removed;
+  RemoveFromFavSuccessfully({
+    required this.removed,
+  });
+}
+
 class AddFavFailure extends TabsScreensState {
   Failures failures;
   AddFavFailure({
+    required this.failures,
+  });
+}
+
+class RemoveFromFavFailure extends TabsScreensState {
+  Failures failures;
+  RemoveFromFavFailure({
     required this.failures,
   });
 }

@@ -1,17 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quotes/core/utils/constants.dart';
+import 'package:quotes/core/utils/app_colors.dart';
+import 'package:quotes/core/utils/functions/lumination.dart';
 import 'package:quotes/core/utils/text_styles.dart';
 import 'package:quotes/features/tabs_screens/domain/entities/quotes_date_entity.dart';
 
 import 'package:quotes/features/tabs_screens/presentation/cubit/tabs_screens_cubit.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeTab extends StatelessWidget {
-  const HomeTab({
+class HomeTab extends StatefulWidget {
+  HomeTab({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  int page = 0;
+  final ScrollController scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+
+    // Setup the listener.
+    scrollController.addListener(() {
+      if (scrollController.offset % MediaQuery.of(context).size.width == 0) {
+        page++;
+        if (page % 2 == 0) {
+          print('new');
+          TabsScreensCubit.get(context).getQuotesData();
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +45,19 @@ class HomeTab extends StatelessWidget {
         List<QuotesDataEntity> quotes =
             TabsScreensCubit.get(context).remoteQuotesList;
 
-        if (state is TabsScreensGetDataRemoteFailureState) {
+        if (state is TabsScreensGetDataRemoteFailureState && quotes.isEmpty) {
           return Center(
             child: Text(state.failures.toString()),
           );
         }
-        if (state is TabsScreensGetDataLoadingState || quotes.isEmpty) {
+        if (state is TabsScreensGetDataLoadingState && quotes.isEmpty) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
         return ListView.builder(
+          controller: scrollController,
           scrollDirection: Axis.horizontal,
           physics: const PageScrollPhysics(),
           itemCount: quotes.length,
@@ -65,7 +90,6 @@ class HomeTab extends StatelessWidget {
                       Text(
                         '-${quotes[index].quote!.author}',
                         style: poppins22W400().copyWith(color: Colors.white),
-                        textAlign: TextAlign.justify,
                       ),
                     ],
                   ),
@@ -73,45 +97,81 @@ class HomeTab extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    color: Colors.black.withOpacity(.7),
+                    color: calculateLuminance()
+                        ? Colors.black.withOpacity(.7)
+                        : Colors.white.withOpacity(.7),
                     width: MediaQuery.of(context).size.width,
                     height: 60.h,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.keyboard_arrow_left_outlined,
-                              size: 40.h,
-                            )),
+                        Visibility(
+                          maintainAnimation: true,
+                          maintainState: true,
+                          visible: index != 0,
+                          child: IconButton(
+                              onPressed: () {
+                                scrollController.animateTo(
+                                  (MediaQuery.of(context).size.width *
+                                      (index - 1)),
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                );
+                              },
+                              icon: Icon(
+                                Icons.keyboard_arrow_left_outlined,
+                                color: AppColors.primaryColor,
+                                size: 40.h,
+                              )),
+                        ),
                         IconButton(
                             onPressed: () async {
-                              SharedPreferences prefs =
+                              /* SharedPreferences prefs =
                                   await SharedPreferences.getInstance();
-                              prefs.remove(Constants.cachedFaveQuotes);
+                             prefs.remove(Constants.cachedFaveQuotes);*/
+                              Clipboard.setData(ClipboardData(
+                                  text: quotes[index].quote!.quote ?? ''));
                             },
                             icon: Icon(
                               Icons.copy,
+                              color: AppColors.primaryColor,
                               size: 40.h,
                             )),
                         IconButton(
                             onPressed: () {
-                              TabsScreensCubit.get(context).addToFav(index);
+                              quotes[index].favorite == true
+                                  ? TabsScreensCubit.get(context)
+                                      .removeFromFav(index)
+                                  : TabsScreensCubit.get(context)
+                                      .addToFav(index);
                             },
                             icon: quotes[index].favorite == true
                                 ? Icon(
                                     Icons.favorite,
+                                    color: AppColors.primaryColor,
                                     size: 40.h,
                                   )
                                 : Icon(
                                     Icons.favorite_border,
+                                    color: AppColors.primaryColor,
                                     size: 40.h,
                                   )),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (index == quotes.length - 2) {
+                                print('pppppp');
+                                TabsScreensCubit.get(context).getQuotesData();
+                              }
+                              scrollController.animateTo(
+                                (MediaQuery.of(context).size.width *
+                                    (index + 1)),
+                                duration: Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            },
                             icon: Icon(
                               Icons.keyboard_arrow_right_outlined,
+                              color: AppColors.primaryColor,
                               size: 40.h,
                             )),
                       ],

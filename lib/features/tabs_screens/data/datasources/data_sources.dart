@@ -9,4 +9,6 @@ abstract class QuotesDataSource {
       {UsersDataModel? usersDataModel});
   Future<Either<Failures, bool>> saveQuotesData(
       QuotesDataEntity quotesDataEntity);
+  Future<Either<Failures, bool>> removeQuotesData(
+      QuotesDataEntity quotesDataEntity);
 }

@@ -14,6 +14,9 @@ class SetDataCubit extends Cubit<SetDataState> {
   List<String> defaultCategories = [...Constants.categories];
   List<String> usersCategory = [];
   List<String> temp = [];
+  UsersDataModel? usersDataModel;
+  final TextEditingController name = TextEditingController();
+
   bool select = false;
   List<Color> colorsList = [
     const Color(0xff3D30A2),
@@ -23,25 +26,36 @@ class SetDataCubit extends Cubit<SetDataState> {
   ];
   int selected = 0;
   SetUsersDDataSource setUsersDDataSource;
-  SetDataCubit(this.setUsersDDataSource) : super(SetDataInitial());
+  SetDataCubit(this.setUsersDDataSource, {this.usersDataModel})
+      : super(SetDataInitial()) {
+    if (usersDataModel != null) {
+      Color newColor = Color(usersDataModel?.color ?? 000);
+      colorsList.contains(newColor) ? null : colorsList.add(newColor);
+      usersCategory = [...usersDataModel!.categories];
+      select = true;
+      categoriesList.removeWhere((element) => usersCategory.contains(element));
+      selected = colorsList.indexOf(newColor);
+      name.text = usersDataModel!.name;
+    }
+  }
 
   static SetDataCubit get(context) => BlocProvider.of(context);
-  Future setUsersData(String name) async {
-    UsersDataModel usersDataModel = UsersDataModel(
+  Future setUsersData() async {
+    usersDataModel = UsersDataModel(
         color: selectedColor().value,
-        name: name,
+        name: name.text,
         categories: usersCategory.isEmpty ? defaultCategories : usersCategory);
     emit(SetUsersDataLoadingState());
     SetUsersDataDomainRepo setUsersDataDomainRepo =
         SetUsersDDataRepo(setUsersDDataSource: setUsersDDataSource);
     SetUsersDataUseCase productsListUseCase = SetUsersDataUseCase(
         setUsersDataDomainRepo: setUsersDataDomainRepo,
-        usersDataModel: usersDataModel);
+        usersDataModel: usersDataModel!);
     var result = await productsListUseCase.call();
     result.fold((l) {
       emit(SetUsersDataFailureState(failures: l));
     }, (r) {
-      emit(SetUsersDataSuccessState(usersDataModel: usersDataModel));
+      emit(SetUsersDataSuccessState(usersDataModel: usersDataModel!));
     });
   }
 

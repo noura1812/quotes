@@ -7,6 +7,6 @@ class AppStrings {
   static String setAppColor = 'set app color';
   static String name = 'Name';
   static String category = 'Category';
-  static String next = 'Next';
+  static String save = 'Save';
   static String thereWasAnError = 'There was an error try again later ';
 }
