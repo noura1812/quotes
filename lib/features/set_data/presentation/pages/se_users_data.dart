@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quotes/config/routes/app_routs.dart';
 import 'package:quotes/core/reusable%20widgets/dotted_line.dart';
 import 'package:quotes/core/reusable%20widgets/textfield_widget.dart';
+import 'package:quotes/core/reusable%20widgets/toast.dart';
 import 'package:quotes/core/utils/app_colors.dart';
 import 'package:quotes/core/utils/app_strings.dart';
 import 'package:quotes/core/utils/text_styles.dart';
@@ -32,6 +33,21 @@ class SetUsersData extends StatelessWidget {
         builder: (context, state) {
           return SafeArea(
               child: Scaffold(
+            appBar: usersData == null
+                ? null
+                : AppBar(
+                    leading: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.black,
+                          size: 40.h,
+                        )),
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                  ),
             body: Padding(
               padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 20.w),
               child: Column(
@@ -41,9 +57,11 @@ class SetUsersData extends StatelessWidget {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              height: 30.h,
-                            ),
+                            usersData == null
+                                ? SizedBox(
+                                    height: 30.h,
+                                  )
+                                : Container(),
                             Form(
                               key: formKey,
                               child: TextFieldWidget(
@@ -208,8 +226,8 @@ class SetUsersData extends StatelessWidget {
                         },
                         child: Text(
                           AppStrings.save,
-                          style: poppins24W600()
-                              .copyWith(color: AppColors.blackColor),
+                          style: poppins24W600().copyWith(
+                              color: SetDataCubit.get(context).selectedColor()),
                         )),
                   ),
                 ],
@@ -243,6 +261,11 @@ class SetUsersData extends StatelessWidget {
                     textAlign: TextAlign.center,
                   )),
             );
+
+            if (state is SetUsersDataSuccessState) {
+              toastMessage('Saved',
+                  color: SetDataCubit.get(context).selectedColor());
+            }
           }
         },
       ),

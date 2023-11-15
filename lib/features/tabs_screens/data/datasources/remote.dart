@@ -30,18 +30,20 @@ class RemoteDto implements QuotesDataSource {
       for (var i = 0; i < 5; i++) {
         int category = random.nextInt(usersData.categories.length);
         int page = random.nextInt(5) + 1;
+        int perPage = random.nextInt(5) + 3;
         String quoteCategory = usersData.categories[category];
         var quotesResponse = await dio.get(
             '${Constants.quotesBaseUrl}${EndPoints.quoteEndPoint}&category=$quoteCategory&');
         Quotes quotes = Quotes.fromJson(quotesResponse.data[0]);
         Images images = Images();
         var imagesResponse = await dio.get(
-            '${Constants.imageBaseUrl}${EndPoints.imagesEndPoint}&q=$quoteCategory&page=$page&per_page=3');
+            '${Constants.imageBaseUrl}${EndPoints.imagesEndPoint}&q=$quoteCategory&page=$page&per_page=$perPage');
         images = Images.fromJson(imagesResponse.data);
         if (images.hits!.isEmpty) {
           i--;
         } else {
-          quotesList.add(QuotesData(image: images.hits![0], quote: quotes));
+          quotesList.add(QuotesData(
+              image: images.hits![random.nextInt(perPage)], quote: quotes));
         }
       }
 

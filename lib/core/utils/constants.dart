@@ -70,6 +70,7 @@ class Constants {
   ];
   static const String cachedUserData = 'usersData';
   static const String cachedFaveQuotes = 'fav quotes';
+  static const String errorMessage = 'there was an error try again later';
   static const imageBaseUrl = 'https://pixabay.com/api/';
   static const quotesBaseUrl = 'https://api.api-ninjas.com/v1/quotes';
 }

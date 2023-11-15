@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quotes/core/reusable%20widgets/toast.dart';
 import 'package:quotes/core/utils/app_colors.dart';
 import 'package:quotes/core/utils/text_styles.dart';
 import 'package:quotes/features/tabs_screens/domain/entities/quotes_date_entity.dart';
@@ -12,7 +14,18 @@ class FavTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TabsScreensCubit, TabsScreensState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is AddFavSuccessfully) {
+          toastMessage(
+            'added successful',
+          );
+        }
+        if (state is RemoveFromFavSuccessfully) {
+          toastMessage(
+            'removed successful',
+          );
+        }
+      },
       builder: (context, state) {
         List<QuotesDataEntity> quotes =
             TabsScreensCubit.get(context).localQuotesList;
@@ -22,9 +35,17 @@ class FavTab extends StatelessWidget {
             child: Text(state.failures.toString()),
           );
         }
-        if (state is TabsScreensGetDataLoadingState || quotes.isEmpty) {
+        if (state is TabsScreensGetDataLoadingState) {
           return const Center(
             child: CircularProgressIndicator(),
+          );
+        }
+        if (quotes.isEmpty) {
+          return Center(
+            child: Text(
+              'no favorites yet ',
+              style: poppins24W600(),
+            ),
           );
         }
         return ListView.builder(
@@ -58,11 +79,15 @@ class FavTab extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         IconButton(
-                            onPressed: () async {},
+                            onPressed: () async {
+                              Clipboard.setData(ClipboardData(
+                                  text: quotes[index].quote!.quote ?? ''));
+                              toastMessage('copied');
+                            },
                             icon: Icon(
                               Icons.copy,
-                              size: 30.h,
                               color: AppColors.primaryColor,
+                              size: 30.h,
                             )),
                         IconButton(
                             onPressed: () {

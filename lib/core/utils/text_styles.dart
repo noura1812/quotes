@@ -17,6 +17,8 @@ TextStyle poppins28W400() => GoogleFonts.poppins(
     fontSize: 28.sp, fontWeight: FontWeight.w400, color: AppColors.textColor);
 TextStyle poppins26W400() => GoogleFonts.poppins(
     fontSize: 26.sp, fontWeight: FontWeight.w400, color: AppColors.textColor);
+TextStyle poppins26W600() => GoogleFonts.poppins(
+    fontSize: 26.sp, fontWeight: FontWeight.w600, color: AppColors.textColor);
 TextStyle poppins24W400() => GoogleFonts.poppins(
     fontSize: 24.sp, fontWeight: FontWeight.w400, color: AppColors.textColor);
 TextStyle poppins22W400() => GoogleFonts.poppins(

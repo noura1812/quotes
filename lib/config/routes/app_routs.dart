@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quotes/features/set_data/presentation/pages/se_users_data.dart';
 import 'package:quotes/features/tabs_screens/presentation/pages/home_layout.dart';
+import 'package:quotes/splash_screen.dart';
 
 class Routes {
-  static const String homeLayOut = '/';
+  static const String splashScreen = '/';
+  static const String homeLayOut = 'home layout';
   static const String settingsScreen = 'settings screen';
 }
 
@@ -18,6 +20,10 @@ class AppRoutes {
         return MaterialPageRoute(
           settings: RouteSettings(arguments: routeSettings.arguments),
           builder: (context) => SetUsersData(),
+        );
+      case Routes.splashScreen:
+        return MaterialPageRoute(
+          builder: (context) => const SplashScreen(),
         );
       default:
         {

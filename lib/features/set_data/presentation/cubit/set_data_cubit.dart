@@ -33,7 +33,9 @@ class SetDataCubit extends Cubit<SetDataState> {
       colorsList.contains(newColor) ? null : colorsList.add(newColor);
       usersCategory = [...usersDataModel!.categories];
       select = true;
+      defaultCategories.clear();
       categoriesList.removeWhere((element) => usersCategory.contains(element));
+      temp = [...categoriesList];
       selected = colorsList.indexOf(newColor);
       name.text = usersDataModel!.name;
     }
@@ -69,15 +71,17 @@ class SetDataCubit extends Cubit<SetDataState> {
   }
 
   searchCategories(String category) {
-    if (category.trim().isNotEmpty) {
-      temp = [...categoriesList];
+    print('lllllll');
+    categoriesList = [...temp];
 
+    if (category.trim().isNotEmpty) {
       categoriesList = categoriesList
           .where((element) => element.contains(category))
           .toList();
+      print(temp);
     } else {
-      categoriesList.clear();
       categoriesList = [...temp];
+      print(temp);
     }
     emit(SearchCategoriesState());
   }
@@ -95,6 +99,8 @@ class SetDataCubit extends Cubit<SetDataState> {
     usersCategory.add(categoriesList[index]);
     usersCategory.sort();
     categoriesList.removeAt(index);
+    temp.removeAt(index);
+
     emit(AddCategoryState());
   }
 
@@ -121,6 +127,7 @@ class SetDataCubit extends Cubit<SetDataState> {
     categoriesList.add(usersCategory[index]);
     categoriesList.sort();
     usersCategory.removeAt(index);
+    temp = [...categoriesList];
 
     if (usersCategory.isEmpty) {
       select = false;
