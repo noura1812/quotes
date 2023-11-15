@@ -13,6 +13,8 @@ class DeleteCategoryState extends SetDataState {}
 
 class SelectColorState extends SetDataState {}
 
+class RefreshState extends SetDataState {}
+
 class SearchCategoriesState extends SetDataState {}
 
 class SelectCategoryState extends SetDataState {}

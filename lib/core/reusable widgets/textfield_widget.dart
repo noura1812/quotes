@@ -7,6 +7,7 @@ typedef Validator = String? Function(String?);
 class TextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final String title;
+  final Widget? refresh;
   final Icon? suffix;
   final Icon? prefix;
   final Validator? validator;
@@ -18,6 +19,7 @@ class TextFieldWidget extends StatelessWidget {
       this.onChange,
       this.suffix,
       this.prefix,
+      this.refresh,
       this.validator});
 
   @override
@@ -25,9 +27,15 @@ class TextFieldWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: poppins20W600(),
+        Row(
+          children: [
+            Text(
+              title,
+              style: poppins20W600(),
+            ),
+            const Spacer(),
+            refresh ?? Container()
+          ],
         ),
         SizedBox(
           height: 4.h,

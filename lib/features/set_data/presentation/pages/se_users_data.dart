@@ -86,6 +86,11 @@ class SetUsersData extends StatelessWidget {
                             TextFieldWidget(
                                 controller: category,
                                 title: AppStrings.category,
+                                refresh: IconButton(
+                                    onPressed: () {
+                                      SetDataCubit.get(context).refresh();
+                                    },
+                                    icon: const Icon(Icons.refresh)),
                                 onChange:
                                     SetDataCubit.get(context).searchCategories),
                             SizedBox(
@@ -217,7 +222,8 @@ class SetUsersData extends StatelessWidget {
                           if (formKey.currentState!.validate()) {
                             SetDataCubit.get(context).setUsersData();
                             if (usersData == null) {
-                              Navigator.pushNamed(context, Routes.homeLayOut);
+                              Navigator.pushReplacementNamed(
+                                  context, Routes.homeLayOut);
                             } else {
                               Navigator.pop(context,
                                   SetDataCubit.get(context).usersDataModel);

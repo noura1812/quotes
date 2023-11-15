@@ -65,6 +65,15 @@ class SetDataCubit extends Cubit<SetDataState> {
     emit(PickColorState());
   }
 
+  refresh() {
+    categoriesList = [...Constants.categories];
+    defaultCategories = [...Constants.categories];
+    usersCategory = [];
+    temp = [...categoriesList];
+    select = false;
+    emit(RefreshState());
+  }
+
   changeSelected(int index) {
     emit(SelectColorState());
     selected = index;
@@ -95,6 +104,9 @@ class SetDataCubit extends Cubit<SetDataState> {
   addCategory(int index) {
     if (select == false && usersCategory.isEmpty) {
       select = true;
+    }
+    if (temp.isEmpty) {
+      temp = [...categoriesList];
     }
     usersCategory.add(categoriesList[index]);
     usersCategory.sort();

@@ -19,17 +19,24 @@ class CategoryCard extends StatelessWidget {
     return Stack(
       children: [
         delete != null
-            ? InkWell(
-                child: Icon(
+            ? IconButton(
+                splashRadius: 0.0001,
+                padding: EdgeInsets.all(0),
+                alignment: Alignment.topLeft,
+                onPressed: () {
+                  if (delete == null) {
+                    print('ppppp');
+                  } else {
+                    delete!();
+                  }
+                },
+                icon: Icon(
                   Icons.cancel_outlined,
                   size: 25.r,
                   color: opacity
                       ? AppColors.blackColor.withOpacity(.3)
                       : AppColors.blackColor,
                 ),
-                onTap: () {
-                  delete!();
-                },
               )
             : Container(),
         Container(
