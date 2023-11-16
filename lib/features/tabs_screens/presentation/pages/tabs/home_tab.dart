@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:quotes/core/reusable%20widgets/toast.dart';
 import 'package:quotes/core/utils/app_colors.dart';
 import 'package:quotes/core/utils/constants.dart';
@@ -26,9 +27,13 @@ class _HomeTabState extends State<HomeTab>
   int page = 0;
   final ScrollController scrollController = ScrollController();
   late ScrollPosition scrollPosition;
+  late FToast fToast;
 
   @override
   void initState() {
+    fToast = FToast();
+    // if you want to use context from globally instead of content we need to pass navigatorKey.currentContext!
+    fToast.init(context);
     super.initState();
 
     // Setup the listener.
@@ -49,18 +54,7 @@ class _HomeTabState extends State<HomeTab>
   Widget build(BuildContext context) {
     super.build(context);
     return BlocConsumer<TabsScreensCubit, TabsScreensState>(
-      listener: (context, state) {
-        if (state is AddFavSuccessfully) {
-          toastMessage(
-            'added successful',
-          );
-        }
-        if (state is RemoveFromFavSuccessfully) {
-          toastMessage(
-            'removed successful',
-          );
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         List<QuotesDataEntity> quotes =
             TabsScreensCubit.get(context).remoteQuotesList;
@@ -174,7 +168,6 @@ class _HomeTabState extends State<HomeTab>
                             onPressed: () async {
                               Clipboard.setData(ClipboardData(
                                   text: quotes[index].quote!.quote ?? ''));
-                              toastMessage('copied');
                             },
                             icon: Icon(
                               Icons.copy,
@@ -183,16 +176,40 @@ class _HomeTabState extends State<HomeTab>
                             )),
                         IconButton(
                             onPressed: () {
-                              quotes[index].favorite == true
-                                  ? TabsScreensCubit.get(context)
-                                      .removeFromFav(index)
-                                  : TabsScreensCubit.get(context)
-                                      .addToFav(index);
+                              if (quotes[index].favorite == true) {
+                                TabsScreensCubit.get(context)
+                                    .removeFromFav(index);
+
+                                fToast.showToast(
+                                  child: toastMessage(
+                                    'removed from favorite',
+                                    icon: Icon(
+                                      Icons.heart_broken,
+                                      size: 25.h,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  gravity: ToastGravity.BOTTOM,
+                                  toastDuration: const Duration(seconds: 2),
+                                );
+                              } else {
+                                TabsScreensCubit.get(context).addToFav(index);
+                                fToast.showToast(
+                                  child: toastMessage('added to favorite',
+                                      icon: Icon(
+                                        Icons.favorite,
+                                        size: 25.h,
+                                        color: Colors.red,
+                                      )),
+                                  gravity: ToastGravity.BOTTOM,
+                                  toastDuration: const Duration(seconds: 2),
+                                );
+                              }
                             },
                             icon: quotes[index].favorite == true
                                 ? Icon(
                                     Icons.favorite,
-                                    color: AppColors.primaryColor,
+                                    color: Colors.red,
                                     size: 40.h,
                                   )
                                 : Icon(

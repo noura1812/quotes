@@ -38,6 +38,8 @@ class SetDataCubit extends Cubit<SetDataState> {
       temp = [...categoriesList];
       selected = colorsList.indexOf(newColor);
       name.text = usersDataModel!.name;
+    } else {
+      temp = [...categoriesList];
     }
   }
 

@@ -19,23 +19,25 @@ class CategoryCard extends StatelessWidget {
     return Stack(
       children: [
         delete != null
-            ? IconButton(
-                splashRadius: 0.0001,
-                padding: EdgeInsets.all(0),
-                alignment: Alignment.topLeft,
-                onPressed: () {
-                  if (delete == null) {
-                    print('ppppp');
-                  } else {
+            ? Theme(
+                data: ThemeData(splashColor: Colors.transparent),
+                child: IconButton(
+                  padding: EdgeInsets.only(left: 0, right: 10.w, bottom: 10.h),
+                  alignment: Alignment.topLeft,
+                  onPressed: () {
                     delete!();
-                  }
-                },
-                icon: Icon(
-                  Icons.cancel_outlined,
-                  size: 25.r,
-                  color: opacity
-                      ? AppColors.blackColor.withOpacity(.3)
-                      : AppColors.blackColor,
+                  },
+                  icon: Padding(
+                    padding:
+                        EdgeInsets.only(left: 0, right: 10.w, bottom: 10.h),
+                    child: Icon(
+                      Icons.cancel_outlined,
+                      size: 25.r,
+                      color: opacity
+                          ? AppColors.blackColor.withOpacity(.3)
+                          : AppColors.blackColor,
+                    ),
+                  ),
                 ),
               )
             : Container(),
