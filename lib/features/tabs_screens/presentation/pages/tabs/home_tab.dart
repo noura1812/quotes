@@ -68,8 +68,10 @@ class _HomeTabState extends State<HomeTab>
           );
         }
         if (state is TabsScreensGetDataLoadingState && quotes.isEmpty) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: CircularProgressIndicator(
+              color: AppColors.primaryColor,
+            ),
           );
         }
 
