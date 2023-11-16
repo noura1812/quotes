@@ -2,7 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quotes/core/utils/functions/firest_run.dart';
-import 'package:quotes/features/set_data/presentation/pages/se_users_data.dart';
+import 'package:quotes/features/set_data/presentation/pages/set_users_data.dart';
 import 'package:quotes/features/tabs_screens/presentation/pages/home_layout.dart';
 
 class SplashScreen extends StatelessWidget {
