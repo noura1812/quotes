@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 
 import 'package:quotes/core/error/failures.dart';
 import 'package:quotes/features/set_data/data/datastores/data_sources.dart';
-import 'package:quotes/features/set_data/domain/repositories/set_users_data_repo.dart';
+import 'package:quotes/features/set_data/domain/repositories/set_users_domain_repo.dart';
 
 class SetUsersDDataRepo implements SetUsersDataDomainRepo {
   SetUsersDDataSource setUsersDDataSource;

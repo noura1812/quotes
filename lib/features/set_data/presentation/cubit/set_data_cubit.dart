@@ -4,8 +4,8 @@ import 'package:quotes/core/error/failures.dart';
 import 'package:quotes/core/utils/constants.dart';
 import 'package:quotes/features/set_data/data/datastores/data_sources.dart';
 import 'package:quotes/features/set_data/data/models/users_data_model.dart';
-import 'package:quotes/features/set_data/data/repositories/set_users_d_data_repo.dart';
-import 'package:quotes/features/set_data/domain/repositories/set_users_data_repo.dart';
+import 'package:quotes/features/set_data/data/repositories/set_users_data_repo.dart';
+import 'package:quotes/features/set_data/domain/repositories/set_users_domain_repo.dart';
 import 'package:quotes/features/set_data/domain/usecases/set_users_data_use_case.dart';
 part 'set_data_state.dart';
 
