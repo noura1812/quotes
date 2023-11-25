@@ -36,6 +36,6 @@ Pixabay API Documentation: https://pixabay.com/api/docs/
 
 Ninjas API Inspiration: https://kidadl.com/quotes/lists
 
-Screenshots & APK: https://play.google.com/store/apps/details?id=com.manchesterapps.quotesandstatus&hl=en&gl=US
+Screenshots & APK: [https://play.google.com/store/apps/details?id=com.manchesterapps.quotesandstatus&hl=en&gl=US](https://drive.google.com/drive/folders/1hPOhPHteWGQ22rH7Djvw-tIOBBCQ1Z9-?usp=sharing)
 
-Demo Video: https://stackoverflow.com/questions/76199223/how-to-launch-a-share-post-option-in-linkedin-from-flutter-app
+Demo Video: [https://stackoverflow.com/questions/76199223/how-to-launch-a-share-post-option-in-linkedin-from-flutter-app](https://www.linkedin.com/feed/update/urn:li:activity:7130742546388910080/)https://www.linkedin.com/feed/update/urn:li:activity:7130742546388910080/
