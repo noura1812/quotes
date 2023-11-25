@@ -34,7 +34,7 @@ Links
 
 Pixabay API Documentation: https://pixabay.com/api/docs/
 
-Ninjas API Inspiration: https://kidadl.com/quotes/lists
+Ninjas API Inspiration: [https://kidadl.com/quotes/lists](https://api-ninjas.com/api/quotes)
 
 Screenshots & APK: [https://play.google.com/store/apps/details?id=com.manchesterapps.quotesandstatus&hl=en&gl=US](https://drive.google.com/drive/folders/1hPOhPHteWGQ22rH7Djvw-tIOBBCQ1Z9-?usp=sharing)
 
