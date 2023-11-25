@@ -7,6 +7,7 @@ Stunning visuals to complement each quote, sourced from Pixabay's vast library o
 Clean architecture patterns for maintainable and scalable code.
 Cubit-based state management for seamless UI updates.
 SharedPreferences for efficient data caching and offline access.
+
 Tech Stack
 Flutter: The cross-platform UI toolkit that powers native mobile apps from a single codebase.
 Clean Architecture: A software design approach that separates business logic from presentation and data layers.
@@ -14,8 +15,8 @@ Cubit: A state management solution that provides stateful widgets without boiler
 SharedPreferences: A persistent key-value storage system for Android and iOS.
 Pixabay API: Access a vast collection of free high-quality images.
 Ninjas API: Get a daily dose of wisdom with inspirational quotes from renowned authors.
-Links
 
+Links
 Pixabay API: https://pixabay.com/api/docs/
 
 Ninjas API: https://kidadl.com/quotes/ninja-quotes-to-be-super-stealthy
