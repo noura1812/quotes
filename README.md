@@ -3,6 +3,7 @@ Start your day inspired and motivated with Quotes, a Flutter app that delivers a
 
 
 Features
+
 Curated collection of inspirational and motivational quotes from renowned authors and thought leaders.
 
 Stunning visuals to complement each quote, sourced from Pixabay's vast library of images.
@@ -15,6 +16,7 @@ SharedPreferences for efficient data caching and offline access.
 
 
 Tech Stack
+
 Flutter: The cross-platform UI toolkit that powers native mobile apps from a single codebase.
 
 Clean Architecture: A software design approach that separates business logic from presentation and data layers.
