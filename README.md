@@ -27,4 +27,3 @@ Embrace the power of words with Quotes, a Flutter app that delivers a random quo
 - Ninjas API Inspiration: [https://api-ninjas.com/api/quotes](https://api-ninjas.com/api/quotes)
 - Screenshots & APK: https://drive.google.com/drive/folders/1hPOhPHteWGQ22rH7Djvw-tIOBBCQ1Z9-?usp=sharing
 - Demo Video: https://www.linkedin.com/feed/update/urn:li:activity:7130742546388910080/
-Please note that the provided demo video link seems to be incorrect.
