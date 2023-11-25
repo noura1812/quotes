@@ -1,6 +1,7 @@
 Quotes App
 Start your day inspired and motivated with Quotes, a Flutter app that delivers a random quote and image every time you open it.
 
+
 Features
 Curated collection of inspirational and motivational quotes from renowned authors and thought leaders.
 
@@ -11,6 +12,8 @@ Clean architecture patterns for maintainable and scalable code.
 Cubit-based state management for seamless UI updates.
 
 SharedPreferences for efficient data caching and offline access.
+
+
 
 Tech Stack
 
@@ -25,6 +28,8 @@ SharedPreferences: A persistent key-value storage system for Android and iOS.
 Pixabay API: Access a vast collection of free high-quality images.
 
 Ninjas API: Get a daily dose of wisdom with inspirational quotes from renowned authors.
+
+
 
 Links
 Pixabay API: https://pixabay.com/api/docs/
