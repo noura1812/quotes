@@ -15,7 +15,11 @@ SharedPreferences: A persistent key-value storage system for Android and iOS.
 Pixabay API: Access a vast collection of free high-quality images.
 Ninjas API: Get a daily dose of wisdom with inspirational quotes from renowned authors.
 Links
+
 Pixabay API: https://pixabay.com/api/docs/
+
 Ninjas API: https://kidadl.com/quotes/ninja-quotes-to-be-super-stealthy
+
 screensots & apk: https://drive.google.com/drive/folders/1hPOhPHteWGQ22rH7Djvw-tIOBBCQ1Z9-?usp=sharing
+
 video: https://www.linkedin.com/posts/noura-abo-zad-6023a01b8_flutterdev-cleanarchitecture-cubit-activity-7130742546388910080-hhPd?utm_source=share&utm_medium=member_desktop 
