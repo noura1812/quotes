@@ -14,9 +14,7 @@ Cubit-based state management for seamless UI updates.
 SharedPreferences for efficient data caching and offline access.
 
 
-
 Tech Stack
-
 Flutter: The cross-platform UI toolkit that powers native mobile apps from a single codebase.
 
 Clean Architecture: A software design approach that separates business logic from presentation and data layers.
