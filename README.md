@@ -2,8 +2,6 @@ Quotes App
 
 Elevate your daily routine with inspiring quotes and captivating images
 
-Start your day with a touch of inspiration and motivation
-
 Embrace the power of words with Quotes, a Flutter app that delivers a random quote and image every time you open it. Indulge in a curated collection of inspirational and motivational quotes from renowned authors and thought leaders, complemented by stunning visuals from Pixabay's vast library of images.
 
 Features
